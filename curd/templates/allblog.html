@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/allblog">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            
+          
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/addblog">Post</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/myblog">My blog</a>
+              
+            </li>
+            {% if user.is_authenticated%}
+            <li class="nav-item pull-right ml-5">
+              <right><a class="btn btn-outline-success my-2 my-lg-0 " href="{% url 'logout' %}">Logout</a></right>
+            </li>
+            {% else %}
+            <li class="nav-item ml-5">
+              <right><a class="btn btn-outline-success my-2 my-lg-0 " href="{% url 'login' %}">Login</a></right>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <br>
+    <div class="container-fluid">
+        <div class="row mx-auto">
+            {% for blog in all %}
+            <div class="card mx-auto mb-3" style="width: 18rem;">
+        
+                <img class="card-img-top" src={{blog.Image.url}} alt="Card image cap" height="150px">
+                <div class="card-body">
+                  <h5 class="card-title">{{blog.Title}}</h5>
+                  <p class="card-text">{{blog.Description|truncatechars:50}}</p>
+                  
+                  <!--<a href="{% url 'editblog' id=blog.id %}" class="btn btn-primary">Edit</a>
+                  <a href="{% url 'deleteblog' id=blog.id %}" class="btn btn-primary">Delete</a>-->
+                  <a href="{% url 'detail' id=blog.id %}" class="btn btn-primary">view Blog</a>
+                  
+
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>      
+    </div>
+</body>
+</html>

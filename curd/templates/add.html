@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+   
+    <title>Add Product</title>
+  </head>
+  <style>
+    .main{
+        border-radius: 10px;
+        border:2px solid black;
+        width:500px;
+        background-color:whitesmoke;
+        
+
+    }
+    button{
+        Background-color:whitesmoke;
+        height:40px;
+        width:150px;
+        border-radius:10px;
+        margin:20px;
+    }
+
+    input{
+        height:40px;
+        width:200px;
+        display:inline-block;
+        border-radius: 5px;
+    }
+
+    
+</style>
+<body>
+    
+    <center>
+        <button type="button" class="btn btn-primary btn-lg">Add New Product</button><br><br>
+        
+            <div class="main">    
+            <form action="{% url 'insert' %}" method="POST" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-success">Add</button>
+            </form>
+    </center>
+            </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    
+
+
+</body>
+</html>
